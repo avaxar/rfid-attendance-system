@@ -6,6 +6,7 @@
 #include "student.hpp"
 
 
+// Initializes LCD object
 LiquidCrystal_I2C clcd(0x27, 20, 4);
 
 
@@ -17,13 +18,16 @@ void initClcd() {
 }
 
 void displayStudent(const Student& student) {
+    // Clears the LCD
     clcd.clear();
 
+    // Displays the name
     clcd.setCursor(0, 0);
     clcd.print("Hello, ");
     clcd.print(student.name);
     clcd.print(".");
 
+    // Displays school ID and class information
     clcd.setCursor(0, 1);
     clcd.print(student.school_id);
 
@@ -31,6 +35,7 @@ void displayStudent(const Student& student) {
     clcd.setCursor(20 - class_n_number.length(), 1);
     clcd.print(class_n_number);
 
+    // Displays card UID
     clcd.setCursor(0, 2);
     clcd.print("Card ID: ");
     clcd.print(String(student.card_uid, HEX));

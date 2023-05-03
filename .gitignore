@@ -1,3 +1,6 @@
+build/
+secrets.h
+
 # Couple of IDEs' temporary/cache directory
 *~
 *.swp

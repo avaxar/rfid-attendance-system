@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../secrets.h"
 #include "student.hpp"
 
 
