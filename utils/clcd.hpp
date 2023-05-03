@@ -6,19 +6,16 @@
 #include "student.hpp"
 
 
-// Initializes LCD object
 LiquidCrystal_I2C clcd(0x27, 20, 4);
 
 
 void initClcd() {
-    // Initializes the character LCD
     clcd.init();
     clcd.backlight();
     clcd.clear();
 }
 
 void displayStudent(const Student& student) {
-    // Clears the LCD
     clcd.clear();
 
     // Displays the name

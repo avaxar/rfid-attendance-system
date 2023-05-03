@@ -1,6 +1,4 @@
 #include <Arduino.h>
-#include <LiquidCrystal_I2C.h>
-#include <MFRC522.h>
 
 #include "utils/clcd.hpp"
 #include "utils/diagnostics.hpp"
@@ -10,15 +8,20 @@
 
 
 void setup() {
+    // Hardware initializations
     Serial.begin(115200);
     SPI.begin();
-
     initClcd();
     initMfrc();
+
+    // IoT initializations
+    checkWiFi();
+    initFirebase();
 }
 
 void loop() {
     heartBeat();
+    checkWiFi();
 
     uint32_t rfid = readRfid();
     if (rfid == 0) {

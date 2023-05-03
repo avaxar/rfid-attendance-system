@@ -9,7 +9,6 @@ MFRC522 mfrc(D3, D4);
 
 
 void initMfrc() {
-    // Initializes the MFRC522
     mfrc.PCD_Init();
     mfrc.PCD_DumpVersionToSerial();
 }
@@ -17,12 +16,12 @@ void initMfrc() {
 uint32_t readRfid() {
     *(uint32_t*)mfrc.uid.uidByte = 0;
 
-    // Checks if the card is present by the reader
+    // Checks whether a card is present near the sensor
     if (!mfrc.PICC_IsNewCardPresent()) {
         return 0;
     }
 
-    // Selects one of the cards
+    // Attempts to read the card
     if (!mfrc.PICC_ReadCardSerial()) {
         Serial.println("[readRfid] A card is present. Not able to read.");
         return 0;
