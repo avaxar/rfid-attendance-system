@@ -20,9 +20,7 @@ void displayStudent(const Student& student) {
 
     // Displays the name
     clcd.setCursor(0, 0);
-    clcd.print("Hello, ");
-    clcd.print(student.name);
-    clcd.print(".");
+    clcd.printf("Hello, %s.", student.name.c_str());
 
     // Displays school ID and class information
     clcd.setCursor(0, 1);
@@ -34,6 +32,5 @@ void displayStudent(const Student& student) {
 
     // Displays card UID
     clcd.setCursor(0, 2);
-    clcd.print("Card ID: ");
-    clcd.print(String(student.card_uid, HEX));
+    clcd.printf("Card ID: %s", String(student.card_uid, HEX).c_str());
 }

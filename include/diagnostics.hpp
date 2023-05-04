@@ -10,8 +10,6 @@ void heartBeat() {
     if (last_beat + BEAT_DELAY <= millis()) {
         last_beat = millis();
 
-        Serial.print("[heartBeat] Still alive. ");
-        Serial.print(millis());
-        Serial.println("ms since boot.");
+        Serial.printf("[heartBeat] Still alive. %ums since boot.\n", millis());
     }
 }

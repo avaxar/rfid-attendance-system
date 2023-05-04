@@ -8,7 +8,7 @@
 #define WIFI_SSID "<Your WiFi's SSID>"
 #define WIFI_PASSWORD "<Your WiFi's password>"
 
-#define FIREBASE_HOSTNAME "<Hostname to your Firebase>"
+#define FIREBASE_URL "<URL to your Firebase>"
 #define FIREBASE_API_KEY "<API key to your Firebase>"
 
 #define FIREBASE_AUTH_EMAIL "<Firebase authentication email>"
