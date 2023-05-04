@@ -1,6 +1,23 @@
 # RfidAttendanceSystem
 
- An attendance registering device per RFID card with the ESP8266 IoT microcontroller. In order to set this project up to your own use, create `secrets.h` in the root of the repository with defining these following macros:
+ An attendance registering device per RFID card with the ESP8266 IoT microcontroller.
+
+ A school IT extracurricular project by:
+
+- [Avaxar](https://github.com/avaxar)
+- [DogeBonk](https://github.com/dozhbonk)
+
+## Dependencies
+
+ In order to compile the project in the Arduino IDE, you have to install these following libraries:
+
+- [MFRC522](https://github.com/miguelbalboa/rfid)
+- [LiquidCrystal I2C](https://github.com/johnrickman/LiquidCrystal_I2C)
+- [Firebase Arduino Client Library for ESP8266 and ESP32](https://github.com/mobizt/Firebase-ESP-Client)
+
+## Configuration
+
+ In order to set this project up to your own use, create `secrets.h` in the root of the repository with defining these following macros:
 
 ```c
 #pragma once
@@ -15,15 +32,19 @@
 #define FIREBASE_AUTH_PASSWORD "<Firebase authentication password>"
 ```
 
- A school IT extracurricular project by:
+## Firebase Layout
 
-- [Avaxar](https://github.com/avaxar)
-- [DogeBonk](https://github.com/dozhbonk)
+ The codebase fetches cardholder/student information by the JSON layout shown below. Adjust your Firebase database accordingly.
 
-## Dependencies
-
- In order to compile the project in the Arduino IDE, you have to install these following libraries:
-
-- [MFRC522](https://github.com/miguelbalboa/rfid)
-- [LiquidCrystal I2C](https://github.com/johnrickman/LiquidCrystal_I2C)
-- [Firebase Arduino Client Library for ESP8266 and ESP32](https://github.com/mobizt/Firebase-ESP-Client)
+```json
+{
+    "students": {
+        "{Card UID 4-byte hex for each student}": {
+            "class_id": INTEGER,
+            "classroom": STRING,
+            "name": STRING,
+            "school_id": INTEGER
+        }
+    }
+}
+```

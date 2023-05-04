@@ -23,14 +23,14 @@ void displayStudent(const Student& student) {
     clcd.printf("Hello, %s.", student.name.c_str());
 
     // Displays school ID and class information
-    clcd.setCursor(0, 1);
+    clcd.setCursor(0, 2);
     clcd.print(student.school_id);
 
-    String class_n_number = String(student.class_id) + " / " + student.classroom;
-    clcd.setCursor(20 - class_n_number.length(), 1);
+    String class_n_number = String(student.class_id) + "/" + student.classroom;
+    clcd.setCursor(20 - class_n_number.length(), 2);
     clcd.print(class_n_number);
 
     // Displays card UID
-    clcd.setCursor(0, 2);
+    clcd.setCursor(0, 3);
     clcd.printf("Card ID: %s", String(student.card_uid, HEX).c_str());
 }
