@@ -1,10 +1,10 @@
 #include <Arduino.h>
 
-#include "utils/clcd.hpp"
-#include "utils/diagnostics.hpp"
-#include "utils/firebase.hpp"
-#include "utils/rfid.hpp"
-#include "utils/student.hpp"
+#include "include/clcd.hpp"
+#include "include/diagnostics.hpp"
+#include "include/firebase.hpp"
+#include "include/rfid.hpp"
+#include "include/student.hpp"
 
 
 void setup() {

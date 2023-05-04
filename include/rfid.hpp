@@ -23,12 +23,12 @@ uint32_t readRfid() {
 
     // Attempts to read the card
     if (!mfrc.PICC_ReadCardSerial()) {
-        Serial.println("[readRfid] A card is present. Not able to read.");
+        Serial.printf("[readRfid] A card is present. Not able to read.\n");
         return 0;
     }
 
     // Dumps debug info about the card
-    Serial.println("[readRfid] A card has been read. Dumping card to serial...");
+    Serial.printf("[readRfid] A card has been read. Dumping card info to serial...\n");
     mfrc.PICC_DumpToSerial(&mfrc.uid);
 
     return *(uint32_t*)mfrc.uid.uidByte;
