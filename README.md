@@ -17,10 +17,12 @@
 
 ## Configuration
 
- In order to set this project up to your own use, create `secrets.h` in the root of the repository with defining these following macros:
+ In order to set this project up to your own use, create `secrets.hpp` in the root of the repository with defining these following macros:
 
 ```c
 #pragma once
+
+#define DEVICE_NAME "<Device name for hostname and Firebase records>"
 
 #define WIFI_SSID "<Your WiFi's SSID>"
 #define WIFI_PASSWORD "<Your WiFi's password>"
