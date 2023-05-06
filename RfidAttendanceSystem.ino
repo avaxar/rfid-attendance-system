@@ -33,14 +33,12 @@ void loop() {
 
     clcd::broadcast("Please wait", "Fetching info...");
     Student student = fbase::fetchStudent(rfid);
-
     if (student.name == "<Unavailable>") {
         clcd::broadcast("Card ID not found", "Card ID: " + String(rfid, HEX));
         misc::delay(5000);
         return;
     }
-    else {
-        clcd::greetStudent(student, "You're late.");
-        misc::delay(7500);
-    }
+
+    clcd::greetStudent(student, "You're late.");
+    misc::delay(5000);
 }

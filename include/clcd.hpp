@@ -14,7 +14,7 @@ namespace misc {
 namespace clcd {
     LiquidCrystal_I2C clcd(0x27, 20, 4);
     String lines[4];
-    int lines_mod_ms[4] = {1}; // Timestamp of the last line modification
+    unsigned long lines_mod[4] = {0}; // Timestamp of the last line modification
 
     void init() {
         clcd.init();
@@ -23,7 +23,7 @@ namespace clcd {
     }
 
     enum Placement { LEFT, MIDDLE, RIGHT };
-    void setLine(const String& string, int line, Placement placement = LEFT) {
+    void setLine(const String& string, unsigned line, Placement placement = LEFT) {
         if (string == lines[line]) {
             return;
         }
@@ -40,7 +40,7 @@ namespace clcd {
             case MIDDLE:
                 lines[line] = "";
                 lines[line].reserve(10 - string.length() / 2 + string.length());
-                for (int i = 0; i < 10 - string.length() / 2; i++) {
+                for (unsigned i = 0; i < 10 - string.length() / 2; i++) {
                     lines[line] += ' ';
                 }
                 lines[line] += string;
@@ -49,22 +49,23 @@ namespace clcd {
             case RIGHT:
                 lines[line] = "";
                 lines[line].reserve(20);
-                for (int i = 0; i < 20 - string.length(); i++) {
+                for (unsigned i = 0; i < 20 - string.length(); i++) {
                     lines[line] += ' ';
                 }
                 lines[line] += string;
                 break;
         }
 
-        lines_mod_ms[line] = millis();
+        lines_mod[line] = millis();
     }
 
-    void scrollLine(const String& string, int line, unsigned long delay_ms = 250, int spacing = 5) {
+    void scrollLine(const String& string, unsigned line, unsigned long delay_ms = 250,
+                    unsigned spacing = 5) {
         char row[21] = {0};
 
-        int starting_chr = (millis() - lines_mod_ms[line]) / delay_ms;
-        for (int i = 0; i < 20; i++) {
-            int chr = (starting_chr + i) % (string.length() + spacing);
+        unsigned starting_chr = ((unsigned)millis() - lines_mod[line]) / delay_ms;
+        for (unsigned i = 0; i < 20; i++) {
+            unsigned chr = (starting_chr + i) % (string.length() + spacing);
 
             if (chr >= string.length()) {
                 row[i] = ' ';
@@ -80,16 +81,16 @@ namespace clcd {
 
     void update(bool override = false) {
         // Timestamp of the last line update to the CLCD
-        static unsigned long last_update_ms[4] = {0};
+        static unsigned long last_update[4] = {0};
 
-        for (int line = 0; line < 4; line++) {
+        for (unsigned line = 0; line < 4; line++) {
             // Discards already-updated static non-scrolling lines
-            if (!override && lines[line].length() <= 20 && last_update_ms[line] > lines_mod_ms[line]) {
+            if (!override && lines[line].length() <= 20 && last_update[line] > lines_mod[line]) {
                 continue;
             }
 
-            // Rate-limits the number of changes to 300ms per line update
-            if (!override && last_update_ms[line] + 300 > millis()) {
+            // Rate-limits the number of changes to 500ms per line update
+            if (!override && last_update[line] + 500 > millis()) {
                 continue;
             }
 
@@ -97,7 +98,7 @@ namespace clcd {
                 clcd.setCursor(0, line);
                 clcd.print(lines[line]);
 
-                for (int i = 0; i < 20 - lines[line].length(); i++) {
+                for (unsigned i = 0; i < 20 - lines[line].length(); i++) {
                     clcd.print(' ');
                 }
             }
@@ -105,14 +106,14 @@ namespace clcd {
                 scrollLine(lines[line], line);
             }
 
-            last_update_ms[line] = millis();
+            last_update[line] = millis();
         }
     }
 
     void clear() {
-        for (int line = 0; line < 4; line++) {
+        for (unsigned line = 0; line < 4; line++) {
             lines[line] = "";
-            lines_mod_ms[line] = millis();
+            lines_mod[line] = millis();
         }
 
         update(true);
@@ -143,7 +144,7 @@ namespace clcd {
         // `class_id_and_classroom` is placed to the right
         if (school_id.length() + class_id_and_classroom.length() < 20) {
             line_2.reserve(20);
-            for (int i = 0; i < 20 - school_id.length() - class_id_and_classroom.length(); i++) {
+            for (unsigned i = 0; i < 20 - school_id.length() - class_id_and_classroom.length(); i++) {
                 line_2 += ' ';
             }
         }

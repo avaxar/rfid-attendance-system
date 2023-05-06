@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Arduino.h>
 #include <Firebase_ESP_Client.h>
 
 #include "../secrets.hpp"
