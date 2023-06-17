@@ -34,6 +34,14 @@
 #define FIREBASE_AUTH_PASSWORD "<Firebase authentication password>"
 ```
 
+## Schematic
+
+ This project requires a NodeMCU ESP8266 microcontroller, 20x4 character LCD screen with an I2C interface, and an MFRC522 RFID reader.
+
+ ![Schematic](/schematic.png)
+
+ (_Please don't mind the hand-drawn schematic on paper_)
+
 ## Firebase Layout
 
  The codebase fetches cardholder/student information by the JSON layout shown below. Adjust your Firebase database accordingly.
