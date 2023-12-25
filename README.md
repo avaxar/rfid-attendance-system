@@ -1,4 +1,4 @@
-# RfidAttendanceSystem
+# RFID Attendance System
 
  An attendance registering device per RFID card with the ESP8266 IoT microcontroller.
 
